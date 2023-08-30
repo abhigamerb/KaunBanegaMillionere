@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Kaun Banega Crorepati</title>
+</head>
+<body>
+    <header class="header">
+       <b> <h1>KBC S1</h1 align ="center"></b>
+    <div class="quiz-container">
+        <div id="question" class="question"></div>
+        <div class="options">
+            <button id="optionA" class="option"></button>
+            <button id="optionB" class="option"></button>
+            <button id="optionC" class="option"></button>
+            <button id="optionD" class="option"></button>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+    
+
+<div class="footer">
+    <p class="money" id="money">Made By Abhineet Borse</p>
+   <!-- ... Previous HTML ... -->
+
+<div class="footer">
+    <p class="money" id="money">Current Prize: ₹0</p>
+    <p class="end-message" id="end-message" style="display: none;">Congratulations! You Won 7 Crores!</p>
+    <button id="play-again" style="display: none;">Play Again</button>
+</div>
+
+</div>
+
+</body>
+</html>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e2b3b;
+    font-family: Arial, sans-serif;
+}
+
+.quiz-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 500px;
+}
+
+.header {
+    background-color:silver;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 5px solid #1e2b3b;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: black;
+}
+
+.question {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #005a9e;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.option:hover {
+    background-color: #00417a;
+}
+
+.footer {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 20px;
+}
+
+.footer a {
+    color: #003366;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<script>
+    const questionElement = document.getElementById("question");
+const optionA = document.getElementById("optionA");
+const optionB = document.getElementById("optionB");
+const optionC = document.getElementById("optionC");
+const optionD = document.getElementById("optionD");
+
+const questions = [
+    {
+        question: "What is the capital of France?",
+        options: ["Paris", "London", "Berlin", "Rome"],
+        answer: "Paris"
+    },
+    {
+        question: "Which planet is known as the Red Planet?",
+        options: ["Earth", "Mars", "Venus", "Jupiter"],
+        answer: "Mars"
+    },
+    {
+        question: "Who made Ramayan?",
+        options: ["Shrimad Valmiki", "me", "Ved Vyas", "Krishna"],
+        answer: "Shrimad Valmiki"
+    },
+    {
+        question: "Who made MAhabharat",
+        options: ["Shrimad Valmiki", "me", "Ved Vyas", "Krishna"],
+        answer: "Ved Vyas"
+    },
+    {
+        question: "Who wrote Bhagavat Geeta?",
+        options: ["Shrimad Valmiki", "me", "Ved Vyas", "Krishna"],
+        answer: "Ved Vyas"
+    },
+    {
+        question: "Are You Got Bored?",
+        options: ["Yes", "Why", "No"],
+        answer: "NO"
+    },
+    {
+        question: "Do You Want To Win This Game?",
+        options: ["Yes", "Why", "No"],
+        answer: "Yes"
+    },
+    {
+        question: "Who wrote Bhagavat Geeta?",
+        options: ["Shrimad Valmiki", "me", "Ved Vyas", "Krishna"],
+        answer: "Ved Vyas"
+    },
+    {
+        question: "Which festival marks the beginning of the Hindu lunar calendar and is celebrated with kite flying?",
+        options: ["Holi", "Diwali", "Makar Sankranti", "Navratri"],
+        answer: "Makar Sankranti"
+    },
+    {
+        question: "What is the traditional art of fabric dyeing and printing that originated in Rajasthan?",
+        options: ["Batik", "Tie and Dye", "Block Printing", "Khadi"],
+        answer: "Block Printing"
+    },
+    {
+        question: "Which classical dance form is known for its graceful movements and intricate hand gestures?",
+        options: ["Kathak", "Bharatanatyam", "Kuchipudi", "Manipuri"],
+        answer: "Bharatanatyam"
+    },
+    {
+        question: "Which Mughal emperor commissioned the construction of the Red Fort in Delhi?",
+        options: ["Akbar", "Shah Jahan", "Aurangzeb", "Humayun"],
+        answer: "Shah Jahan"
+    },
+    {
+        question: "Which musical instrument is often associated with the state of Punjab?",
+        options: ["Sitar", "Tabla", "Dhol", "Flute"],
+        answer: "Dhol"
+    },
+    {
+        question: "In which city is the historic Hawa Mahal (Palace of Winds) located?",
+        options: ["Jaipur", "Agra", "Mumbai", "Varanasi"],
+        answer: "Jaipur"
+    },
+    {
+        question: "What is the traditional clothing for men in Kerala, typically worn for special occasions?",
+        options: ["Sherwani", "Dhoti", "Kurta", "Pathani Suit"],
+        answer: "Dhoti"
+    },
+    {
+        question: "Which famous Indian film won the Academy Award for Best Original Song for the song 'Jai Ho'?",
+        options: ["Lagaan", "Slumdog Millionaire", "Dil Se", "Monsoon Wedding"],
+        answer: "Slumdog Millionaire"
+    },
+    {
+        question: "Which historical site in Delhi was originally built by the Mughal emperor Humayun's widow?",
+        options: ["Qutub Minar", "India Gate", "Lotus Temple", "Humayun's Tomb"],
+        answer: "Humayun's Tomb"
+    },
+    {
+        question: "Which river is considered sacred by Hindus and is known as the 'Ganga' in India?",
+        options: ["Yamuna", "Brahmaputra", "Indus", "Ganges"],
+        answer: "Ganges"
+    },
+    {
+        question: "What is the traditional art of painting on water using natural dyes called?",
+        options: ["Madhubani", "Warli", "Pattachitra", "Rangoli"],
+        answer: "Madhubani"
+    },
+    {
+        question: "Which traditional Indian system of medicine focuses on balancing the body's energy through natural treatments?",
+        options: ["Yoga", "Ayurveda", "Siddha", "Unani"],
+        answer: "Ayurveda"
+    },
+    {
+        question: "Which mountain range forms the northern boundary of India?",
+        options: ["Himalayas", "Western Ghats", "Aravalli Range", "Vindhya Range"],
+        answer: "Himalayas"
+    },
+    {
+        question: "What is the traditional headgear worn by Sikh men called?",
+        options: ["Topi", "Turban", "Pagri", "Cap"],
+        answer: "Turban"
+    },
+    {
+        question: "Which historic trade route connected India with Central Asia and the Mediterranean?",
+        options: ["Silk Road", "Spice Route", "Salt March", "Maritime Silk Route"],
+        answer: "Silk Road"
+    },
+    {
+        question: "Which ancient script is considered the oldest known script in the Indian subcontinent?",
+        options: ["Sanskrit", "Tamil", "Pali", "Indus Script"],
+        answer: "Sanskrit"
+    },
+    {
+        question: "Which traditional dance form of Manipur is known for its graceful and rhythmic movements?",
+        options: ["Kathak", "Bharatanatyam", "Kuchipudi", "Manipuri"],
+        answer: "Manipuri"
+    },
+    {
+        question: "Which historic monument in Agra is often referred to as the 'Baby Taj'?",
+        options: ["Agra Fort", "Fatehpur Sikri", "Itimad-ud-Daulah", "Taj Mahal"],
+        answer: "Itimad-ud-Daulah"
+    },
+    {
+        question: "Which epic poem, attributed to the sage Valmiki, narrates the life of Lord Rama?",
+        options: ["Ramayana", "Mahabharata", "Bhagavad Gita", "Vedas"],
+        answer: "Ramayana"
+    },
+    {
+        question: "Which state in India is known for its exquisite tea plantations in the Nilgiri Hills?",
+        options: ["Assam", "West Bengal", "Kerala", "Tamil Nadu"],
+        answer: "Tamil Nadu"
+    },
+    {
+        question: "Which traditional Indian music genre is associated with the state of Rajasthan?",
+        options: ["Carnatic", "Hindustani", "Rajasthani Folk", "Bengali"],
+        answer: "Rajasthani Folk"
+    },
+   
+
+    ];
+    
+    let currentQuestionIndex = 0;
+
+function displayQuestion() {
+    if (currentQuestionIndex < questions.length) {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionElement.textContent = currentQuestion.question;
+        optionA.textContent = currentQuestion.options[0];
+        optionB.textContent = currentQuestion.options[1];
+        optionC.textContent = currentQuestion.options[2];
+        optionD.textContent = currentQuestion.options[3];
+    } else {
+        questionElement.textContent = "Congratulations! You Won 7 Crores!";
+        optionA.style.display = "none";
+        optionB.style.display = "none";
+        optionC.style.display = "none";
+        optionD.style.display = "none";
+    }
+}
+
+function checkAnswer(selectedOption) {
+    const currentQuestion = questions[currentQuestionIndex];
+    if (selectedOption === currentQuestion.answer) {
+        alert("Correct!");
+    } else {
+        alert("Incorrect. The correct answer is: " + currentQuestion.answer);
+    }
+    
+    currentQuestionIndex++;
+    
+    displayQuestion();
+}
+
+displayQuestion();
+
+optionA.addEventListener("click", () => checkAnswer(optionA.textContent));
+optionB.addEventListener("click", () => checkAnswer(optionB.textContent));
+optionC.addEventListener("click", () => checkAnswer(optionC.textContent));
+optionD.addEventListener("click", () => checkAnswer(optionD.textContent));
+// ... Previous code ...
+// ... Previous code ...
+
+const playAgainButton = document.getElementById("play-again");
+const endMessage = document.getElementById("end-message");
+
+function displayEndMessage() {
+    endMessage.style.display = "block";
+    playAgainButton.style.display = "block";
+    optionA.style.display = "none";
+    optionB.style.display = "none";
+    optionC.style.display = "none";
+    optionD.style.display = "none";
+    moneyElement.style.display = "none";
+}
+
+playAgainButton.addEventListener("click", () => {
+    currentQuestionIndex = 0;
+    moneyIndex = 0;
+    endMessage.style.display = "none";
+    playAgainButton.style.display = "none";
+    optionA.style.display = "block";
+    optionB.style.display = "block";
+    optionC.style.display = "block";
+    optionD.style.display = "block";
+    moneyElement.style.display = "block";
+    displayQuestion();
+});
+
+// ... Rest of the code ...
+
+
+
+
+</script>
